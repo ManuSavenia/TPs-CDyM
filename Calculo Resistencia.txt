@@ -1,0 +1,7 @@
+Datos:
+	Vcc= 5v, I= 10mA, Vled(Amarillo)= 2v
+
+Calculo:
+	Planteamos ley de Kirchoff y obtenemos:
+	5v = 2v + 10mA * R
+	[R = (5v - 2v)/10mA = 300 Ohms]
