@@ -11,7 +11,6 @@
 
 int main(void){
     /* Setup */
-	// bit en 0: entrada, 1: salida
     DDRD = 0xFF;                            // Puerto D como salida
     DDRB &= (1 << PORTB3 | 1 << PORTB4);    // Bit 3 y 4 puerto C como salida
     DDRC &= ~(1 << PORTC0 | 1 << PORTC1);	// Bit 0 y 1 puerto C como entrada
@@ -20,7 +19,6 @@ int main(void){
     uint8_t first = 1;                      // Variable para almacenar el estado de cada secuencia
     uint8_t c0_active = 1;                  // Variable para almacenar el estado del pulsador en C0
 	
-    /* Loop */
     while (1){
 
         if (c0_active && (PINC & (1 << PINC0))){
@@ -34,7 +32,7 @@ int main(void){
             c0_active = 1;
         }
 
-        //pulsador en el pin C1
+        // pulsador en el pin C1
         if ((PINC & (1 << PINC1))){
             PORTB &= ~(1 << PORTB3 | 1 << PORTB4);
         } else{
@@ -54,8 +52,8 @@ int main(void){
         }
         _delay_ms(100);
 
-        first = 0; //ya no estamos en la primera iteracion de la secuencia
+        first = 0;
     }
-    /* Punto de finalización del programa (NO se debe llegar a este lugar) */
+    
     return 0;
 }
