@@ -60,7 +60,7 @@ int main(void)
                 PORTD = 0b10000000;
             }
             else{
-                PORTD = der ? (PORTD >> 1) ? (PORTD << 1);
+                PORTD = der ? (PORTD >> 1) : (PORTD << 1);
             }
             if (PORTD & (1 << PORTD0)){
                 der = 0;
