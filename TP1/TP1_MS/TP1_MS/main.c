@@ -19,6 +19,7 @@ int main(void)
     uint8_t state = 1;                    // Variable para almacenar el estado del programa
     uint8_t first = 1;                    // Variable para almacenar el estado de cada secuencia
     uint8_t c0_active = 1;                // Variable para almacenar el estado del pulsador en C0
+    uint8_t der = 1;
 
     while (1)
     {
@@ -60,10 +61,10 @@ int main(void)
                 PORTD = 0b10000000;
             }
             if (PORTD & (1 << PORT0)){
-                int der = 0;
+                der = 0;
             }
             else if (PORTD & (1 << PORT7)){
-                int der = 1;
+                der = 1;
             }
             PORTD = der ? (PORTD >> 1) ? (PORTD << 1);
             break;
