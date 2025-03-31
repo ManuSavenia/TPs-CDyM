@@ -3,29 +3,29 @@ TP1_MS.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  00000196  2**0
+  0 .data         00000000  00800100  00800100  000001b2  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000142  00000000  00000000  00000054  2**1
+  1 .text         0000015e  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  00000196  2**0
+  2 .comment      00000030  00000000  00000000  000001b2  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001c8  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001e4  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  00000208  2**0
+  4 .debug_aranges 00000020  00000000  00000000  00000224  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0000072a  00000000  00000000  00000228  2**0
+  5 .debug_info   00000739  00000000  00000000  00000244  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000066d  00000000  00000000  00000952  2**0
+  6 .debug_abbrev 0000067c  00000000  00000000  0000097d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000375  00000000  00000000  00000fbf  2**0
+  7 .debug_line   000003a3  00000000  00000000  00000ff9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  00001334  2**2
+  8 .debug_frame  00000024  00000000  00000000  0000139c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000003bb  00000000  00000000  00001358  2**0
+  9 .debug_str    000003b6  00000000  00000000  000013c0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000000f5  00000000  00000000  00001713  2**0
+ 10 .debug_loc    0000011f  00000000  00000000  00001776  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000010  00000000  00000000  00001808  2**0
+ 11 .debug_ranges 00000010  00000000  00000000  00001895  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -66,7 +66,7 @@ Disassembly of section .text:
   70:	de bf       	out	0x3e, r29	; 62
   72:	cd bf       	out	0x3d, r28	; 61
   74:	0e 94 40 00 	call	0x80	; 0x80 <main>
-  78:	0c 94 9f 00 	jmp	0x13e	; 0x13e <_exit>
+  78:	0c 94 ad 00 	jmp	0x15a	; 0x15a <_exit>
 
 0000007c <__bad_interrupt>:
   7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -95,176 +95,216 @@ int main(void)
     uint8_t state = 1;                    // Variable para almacenar el estado del programa
     uint8_t first = 1;                    // Variable para almacenar el estado de cada secuencia
     uint8_t c0_active = 1;                // Variable para almacenar el estado del pulsador en C0
-  96:	91 e0       	ldi	r25, 0x01	; 1
+    uint8_t der = 1;
+  96:	61 e0       	ldi	r22, 0x01	; 1
+    DDRB |= (1 << PORTB3 | 1 << PORTB4);  // Bit 3 y 4 puerto C como salida
+    DDRC &= ~(1 << PORTC0 | 1 << PORTC1); // Bit 0 y 1 puerto C como entrada
+    PORTC |= (1 << PORTC0 | 1 << PORTC1); // Resistencias Pull-Up en bit 0 y 1 puerto C
+    uint8_t state = 1;                    // Variable para almacenar el estado del programa
+    uint8_t first = 1;                    // Variable para almacenar el estado de cada secuencia
+    uint8_t c0_active = 1;                // Variable para almacenar el estado del pulsador en C0
+  98:	91 e0       	ldi	r25, 0x01	; 1
     DDRD = 0xFF;                          // Puerto D como salida
     DDRB |= (1 << PORTB3 | 1 << PORTB4);  // Bit 3 y 4 puerto C como salida
     DDRC &= ~(1 << PORTC0 | 1 << PORTC1); // Bit 0 y 1 puerto C como entrada
     PORTC |= (1 << PORTC0 | 1 << PORTC1); // Resistencias Pull-Up en bit 0 y 1 puerto C
     uint8_t state = 1;                    // Variable para almacenar el estado del programa
     uint8_t first = 1;                    // Variable para almacenar el estado de cada secuencia
-  98:	41 e0       	ldi	r20, 0x01	; 1
+  9a:	41 e0       	ldi	r20, 0x01	; 1
     /* Setup */
     DDRD = 0xFF;                          // Puerto D como salida
     DDRB |= (1 << PORTB3 | 1 << PORTB4);  // Bit 3 y 4 puerto C como salida
     DDRC &= ~(1 << PORTC0 | 1 << PORTC1); // Bit 0 y 1 puerto C como entrada
     PORTC |= (1 << PORTC0 | 1 << PORTC1); // Resistencias Pull-Up en bit 0 y 1 puerto C
     uint8_t state = 1;                    // Variable para almacenar el estado del programa
-  9a:	81 e0       	ldi	r24, 0x01	; 1
-    uint8_t c0_active = 1;                // Variable para almacenar el estado del pulsador en C0
+  9c:	81 e0       	ldi	r24, 0x01	; 1
+    uint8_t der = 1;
 
     while (1)
     {
 
         if (c0_active && (PINC & (1 << PINC0)))
-  9c:	99 23       	and	r25, r25
-  9e:	11 f0       	breq	.+4      	; 0xa4 <main+0x24>
-  a0:	30 99       	sbic	0x06, 0	; 6
+  9e:	99 23       	and	r25, r25
+  a0:	11 f0       	breq	.+4      	; 0xa6 <main+0x26>
+  a2:	30 99       	sbic	0x06, 0	; 6
         {
             c0_active = 0;
-  a2:	90 e0       	ldi	r25, 0x00	; 0
+  a4:	90 e0       	ldi	r25, 0x00	; 0
         }
 
         // si se presiono el pulsador en C0, cambiamos de estado
         if (!c0_active && !(PINC & (1 << PINC0)))
-  a4:	91 11       	cpse	r25, r1
-  a6:	0b c0       	rjmp	.+22     	; 0xbe <main+0x3e>
-  a8:	30 99       	sbic	0x06, 0	; 6
-  aa:	09 c0       	rjmp	.+18     	; 0xbe <main+0x3e>
+  a6:	91 11       	cpse	r25, r1
+  a8:	0b c0       	rjmp	.+22     	; 0xc0 <main+0x40>
+  aa:	30 99       	sbic	0x06, 0	; 6
+  ac:	09 c0       	rjmp	.+18     	; 0xc0 <main+0x40>
         {
             state = (state == 3) ? 1 : state + 1;
-  ac:	83 30       	cpi	r24, 0x03	; 3
-  ae:	21 f0       	breq	.+8      	; 0xb8 <main+0x38>
-  b0:	8f 5f       	subi	r24, 0xFF	; 255
+  ae:	83 30       	cpi	r24, 0x03	; 3
+  b0:	21 f0       	breq	.+8      	; 0xba <main+0x3a>
+  b2:	8f 5f       	subi	r24, 0xFF	; 255
             first = 1;
             c0_active = 1;
-  b2:	91 e0       	ldi	r25, 0x01	; 1
+  b4:	91 e0       	ldi	r25, 0x01	; 1
 
         // si se presiono el pulsador en C0, cambiamos de estado
         if (!c0_active && !(PINC & (1 << PINC0)))
         {
             state = (state == 3) ? 1 : state + 1;
             first = 1;
-  b4:	41 e0       	ldi	r20, 0x01	; 1
-  b6:	03 c0       	rjmp	.+6      	; 0xbe <main+0x3e>
+  b6:	41 e0       	ldi	r20, 0x01	; 1
+  b8:	03 c0       	rjmp	.+6      	; 0xc0 <main+0x40>
             c0_active = 1;
-  b8:	91 e0       	ldi	r25, 0x01	; 1
+  ba:	91 e0       	ldi	r25, 0x01	; 1
 
         // si se presiono el pulsador en C0, cambiamos de estado
         if (!c0_active && !(PINC & (1 << PINC0)))
         {
             state = (state == 3) ? 1 : state + 1;
             first = 1;
-  ba:	41 e0       	ldi	r20, 0x01	; 1
+  bc:	41 e0       	ldi	r20, 0x01	; 1
         }
 
         // si se presiono el pulsador en C0, cambiamos de estado
         if (!c0_active && !(PINC & (1 << PINC0)))
         {
             state = (state == 3) ? 1 : state + 1;
-  bc:	81 e0       	ldi	r24, 0x01	; 1
+  be:	81 e0       	ldi	r24, 0x01	; 1
             first = 1;
             c0_active = 1;
         }
 
         // pulsador en el pin C1
         if ((PINC & (1 << PINC1)))
-  be:	31 9b       	sbis	0x06, 1	; 6
-  c0:	04 c0       	rjmp	.+8      	; 0xca <main+0x4a>
+  c0:	31 9b       	sbis	0x06, 1	; 6
+  c2:	04 c0       	rjmp	.+8      	; 0xcc <main+0x4c>
         {
             PORTB &= ~(1 << PORTB3 | 1 << PORTB4);
-  c2:	25 b1       	in	r18, 0x05	; 5
-  c4:	27 7e       	andi	r18, 0xE7	; 231
-  c6:	25 b9       	out	0x05, r18	; 5
-  c8:	0d c0       	rjmp	.+26     	; 0xe4 <main+0x64>
+  c4:	25 b1       	in	r18, 0x05	; 5
+  c6:	27 7e       	andi	r18, 0xE7	; 231
+  c8:	25 b9       	out	0x05, r18	; 5
+  ca:	0d c0       	rjmp	.+26     	; 0xe6 <main+0x66>
         }
         else
         {
             PORTB = (PORTB & ~(1 << PORTB4 | 1 << PORTB3)) | (state << PORTB3);
-  ca:	55 b1       	in	r21, 0x05	; 5
-  cc:	28 2f       	mov	r18, r24
-  ce:	30 e0       	ldi	r19, 0x00	; 0
-  d0:	22 0f       	add	r18, r18
-  d2:	33 1f       	adc	r19, r19
-  d4:	22 0f       	add	r18, r18
-  d6:	33 1f       	adc	r19, r19
-  d8:	22 0f       	add	r18, r18
-  da:	33 1f       	adc	r19, r19
-  dc:	35 2f       	mov	r19, r21
-  de:	37 7e       	andi	r19, 0xE7	; 231
-  e0:	23 2b       	or	r18, r19
-  e2:	25 b9       	out	0x05, r18	; 5
+  cc:	55 b1       	in	r21, 0x05	; 5
+  ce:	28 2f       	mov	r18, r24
+  d0:	30 e0       	ldi	r19, 0x00	; 0
+  d2:	22 0f       	add	r18, r18
+  d4:	33 1f       	adc	r19, r19
+  d6:	22 0f       	add	r18, r18
+  d8:	33 1f       	adc	r19, r19
+  da:	22 0f       	add	r18, r18
+  dc:	33 1f       	adc	r19, r19
+  de:	35 2f       	mov	r19, r21
+  e0:	37 7e       	andi	r19, 0xE7	; 231
+  e2:	23 2b       	or	r18, r19
+  e4:	25 b9       	out	0x05, r18	; 5
         }
 
         switch (state)
-  e4:	82 30       	cpi	r24, 0x02	; 2
-  e6:	61 f0       	breq	.+24     	; 0x100 <main+0x80>
-  e8:	83 30       	cpi	r24, 0x03	; 3
-  ea:	b1 f0       	breq	.+44     	; 0x118 <main+0x98>
-  ec:	81 30       	cpi	r24, 0x01	; 1
-  ee:	e1 f4       	brne	.+56     	; 0x128 <main+0xa8>
+  e6:	82 30       	cpi	r24, 0x02	; 2
+  e8:	61 f0       	breq	.+24     	; 0x102 <main+0x82>
+  ea:	83 30       	cpi	r24, 0x03	; 3
+  ec:	b1 f0       	breq	.+44     	; 0x11a <main+0x9a>
+  ee:	81 30       	cpi	r24, 0x01	; 1
+  f0:	49 f5       	brne	.+82     	; 0x144 <main+0xc4>
         {
         case 1:
             PORTD = first ? 0b10101010 : ~PORTD;
-  f0:	41 11       	cpse	r20, r1
-  f2:	03 c0       	rjmp	.+6      	; 0xfa <main+0x7a>
-  f4:	2b b1       	in	r18, 0x0b	; 11
-  f6:	20 95       	com	r18
-  f8:	01 c0       	rjmp	.+2      	; 0xfc <main+0x7c>
-  fa:	2a ea       	ldi	r18, 0xAA	; 170
-  fc:	2b b9       	out	0x0b, r18	; 11
+  f2:	41 11       	cpse	r20, r1
+  f4:	03 c0       	rjmp	.+6      	; 0xfc <main+0x7c>
+  f6:	2b b1       	in	r18, 0x0b	; 11
+  f8:	20 95       	com	r18
+  fa:	01 c0       	rjmp	.+2      	; 0xfe <main+0x7e>
+  fc:	2a ea       	ldi	r18, 0xAA	; 170
+  fe:	2b b9       	out	0x0b, r18	; 11
             break;
-  fe:	14 c0       	rjmp	.+40     	; 0x128 <main+0xa8>
+ 100:	21 c0       	rjmp	.+66     	; 0x144 <main+0xc4>
         case 2:
             PORTD = (first || PORTD & (1 << PORTD7)) ? 0b00000001 : PORTD << 1;
- 100:	41 11       	cpse	r20, r1
- 102:	05 c0       	rjmp	.+10     	; 0x10e <main+0x8e>
- 104:	5f 99       	sbic	0x0b, 7	; 11
- 106:	05 c0       	rjmp	.+10     	; 0x112 <main+0x92>
- 108:	2b b1       	in	r18, 0x0b	; 11
- 10a:	22 0f       	add	r18, r18
- 10c:	03 c0       	rjmp	.+6      	; 0x114 <main+0x94>
- 10e:	21 e0       	ldi	r18, 0x01	; 1
- 110:	01 c0       	rjmp	.+2      	; 0x114 <main+0x94>
- 112:	21 e0       	ldi	r18, 0x01	; 1
- 114:	2b b9       	out	0x0b, r18	; 11
+ 102:	41 11       	cpse	r20, r1
+ 104:	05 c0       	rjmp	.+10     	; 0x110 <main+0x90>
+ 106:	5f 99       	sbic	0x0b, 7	; 11
+ 108:	05 c0       	rjmp	.+10     	; 0x114 <main+0x94>
+ 10a:	2b b1       	in	r18, 0x0b	; 11
+ 10c:	22 0f       	add	r18, r18
+ 10e:	03 c0       	rjmp	.+6      	; 0x116 <main+0x96>
+ 110:	21 e0       	ldi	r18, 0x01	; 1
+ 112:	01 c0       	rjmp	.+2      	; 0x116 <main+0x96>
+ 114:	21 e0       	ldi	r18, 0x01	; 1
+ 116:	2b b9       	out	0x0b, r18	; 11
             break;
- 116:	08 c0       	rjmp	.+16     	; 0x128 <main+0xa8>
+ 118:	15 c0       	rjmp	.+42     	; 0x144 <main+0xc4>
         case 3:
-            PORTD = first ? 0b00000001 : PORTD ^ 0b10000001;
- 118:	41 11       	cpse	r20, r1
- 11a:	04 c0       	rjmp	.+8      	; 0x124 <main+0xa4>
- 11c:	3b b1       	in	r19, 0x0b	; 11
- 11e:	21 e8       	ldi	r18, 0x81	; 129
- 120:	23 27       	eor	r18, r19
- 122:	01 c0       	rjmp	.+2      	; 0x126 <main+0xa6>
- 124:	21 e0       	ldi	r18, 0x01	; 1
- 126:	2b b9       	out	0x0b, r18	; 11
+            if (first){
+ 11a:	44 23       	and	r20, r20
+ 11c:	19 f0       	breq	.+6      	; 0x124 <main+0xa4>
+                PORTD = 0b10000000;
+ 11e:	20 e8       	ldi	r18, 0x80	; 128
+ 120:	2b b9       	out	0x0b, r18	; 11
+ 122:	08 c0       	rjmp	.+16     	; 0x134 <main+0xb4>
+            }
+            else{
+                PORTD = der ? (PORTD >> 1) : (PORTD << 1);
+ 124:	66 23       	and	r22, r22
+ 126:	19 f0       	breq	.+6      	; 0x12e <main+0xae>
+ 128:	2b b1       	in	r18, 0x0b	; 11
+ 12a:	26 95       	lsr	r18
+ 12c:	02 c0       	rjmp	.+4      	; 0x132 <main+0xb2>
+ 12e:	2b b1       	in	r18, 0x0b	; 11
+ 130:	22 0f       	add	r18, r18
+ 132:	2b b9       	out	0x0b, r18	; 11
+            }
+            if (PORTD & (1 << PORTD0)){
+ 134:	58 99       	sbic	0x0b, 0	; 11
+ 136:	03 c0       	rjmp	.+6      	; 0x13e <main+0xbe>
+                der = 0;
+            }
+            else if (PORTD & (1 << PORTD7)){
+ 138:	5f 9b       	sbis	0x0b, 7	; 11
+ 13a:	04 c0       	rjmp	.+8      	; 0x144 <main+0xc4>
+ 13c:	02 c0       	rjmp	.+4      	; 0x142 <main+0xc2>
+            }
+            else{
+                PORTD = der ? (PORTD >> 1) : (PORTD << 1);
+            }
+            if (PORTD & (1 << PORTD0)){
+                der = 0;
+ 13e:	60 e0       	ldi	r22, 0x00	; 0
+ 140:	01 c0       	rjmp	.+2      	; 0x144 <main+0xc4>
+            }
+            else if (PORTD & (1 << PORTD7)){
+                der = 1;
+ 142:	61 e0       	ldi	r22, 0x01	; 1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 128:	2f ef       	ldi	r18, 0xFF	; 255
- 12a:	31 ee       	ldi	r19, 0xE1	; 225
- 12c:	44 e0       	ldi	r20, 0x04	; 4
- 12e:	21 50       	subi	r18, 0x01	; 1
- 130:	30 40       	sbci	r19, 0x00	; 0
- 132:	40 40       	sbci	r20, 0x00	; 0
- 134:	e1 f7       	brne	.-8      	; 0x12e <main+0xae>
- 136:	00 c0       	rjmp	.+0      	; 0x138 <main+0xb8>
- 138:	00 00       	nop
+ 144:	2f ef       	ldi	r18, 0xFF	; 255
+ 146:	31 ee       	ldi	r19, 0xE1	; 225
+ 148:	44 e0       	ldi	r20, 0x04	; 4
+ 14a:	21 50       	subi	r18, 0x01	; 1
+ 14c:	30 40       	sbci	r19, 0x00	; 0
+ 14e:	40 40       	sbci	r20, 0x00	; 0
+ 150:	e1 f7       	brne	.-8      	; 0x14a <main+0xca>
+ 152:	00 c0       	rjmp	.+0      	; 0x154 <main+0xd4>
+ 154:	00 00       	nop
+            }
             break;
         }
         _delay_ms(100);
 
         first = 0;
- 13a:	40 e0       	ldi	r20, 0x00	; 0
+ 156:	40 e0       	ldi	r20, 0x00	; 0
     }
- 13c:	af cf       	rjmp	.-162    	; 0x9c <main+0x1c>
+ 158:	a2 cf       	rjmp	.-188    	; 0x9e <main+0x1e>
 
-0000013e <_exit>:
- 13e:	f8 94       	cli
+0000015a <_exit>:
+ 15a:	f8 94       	cli
 
-00000140 <__stop_program>:
- 140:	ff cf       	rjmp	.-2      	; 0x140 <__stop_program>
+0000015c <__stop_program>:
+ 15c:	ff cf       	rjmp	.-2      	; 0x15c <__stop_program>
