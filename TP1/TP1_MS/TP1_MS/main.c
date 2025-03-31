@@ -56,17 +56,18 @@ int main(void)
             PORTD = (first || PORTD & (1 << PORTD7)) ? 0b00000001 : PORTD << 1;
             break;
         case 3:
-            PORTD = (first) ? 0b10000000 : PORTD 0b10000001;
             if (first){
                 PORTD = 0b10000000;
             }
-            if (PORTD & (1 << PORT0)){
+            else{
+                PORTD = der ? (PORTD >> 1) ? (PORTD << 1);
+            }
+            if (PORTD & (1 << PORTD0)){
                 der = 0;
             }
-            else if (PORTD & (1 << PORT7)){
+            else if (PORTD & (1 << PORTD7)){
                 der = 1;
             }
-            PORTD = der ? (PORTD >> 1) ? (PORTD << 1);
             break;
         }
         _delay_ms(100);
