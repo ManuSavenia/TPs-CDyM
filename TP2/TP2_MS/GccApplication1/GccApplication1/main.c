@@ -37,15 +37,8 @@ char *get_random_word(char *words[], uint8_t size)
 }
 
 estado_t estado_actual = INICIO;
-uint8_t contador_ticks_estado = 0; // Cuenta ticks de 2 segundos
-uint8_t mostrar_palabra = 1;
-uint8_t pos_password = 0;	  // indice actual de la contrasenia a ingresar
-uint8_t numero_ingresado = 0; // numero ingresado por el usuario
-uint8_t vidas = 3;
-char caracter;
-char *curr_word; // palabra a adivinar
-char *curr_word; // palabra a adivinar
-
+uint8_t input_char, hp, pass_index;
+char *password, guess[6];
 
 const char *diccionario[] = {
 	"Arbol", "Boton", "CDyMC", "ClavE", "Facil", "Gafas", "Hojas", "LiBro", "Lanza", "Nieve",
@@ -145,10 +138,14 @@ int main(void)
 				{
 					if (KEYPAD_Scan(&key))
 					{
-						if (key < 16){
-							if (KeyMap[key] != TECLA_CONFIRMAR){
-								if (pos_password )
-								update_input_number(&numero_ingresado, key);
+						if (key < 16)
+						{
+							if (KeyMap[key] != TECLA_CONFIRMAR)
+							{
+								if (pos_password)
+									update_input_number(&numero_ingresado, key);
+								LCDGotoXY(pos_password, 0);
+								LCDsendChar(caracter);
 							}
 						}
 						if (key < 16 && KeyMap[key] == TECLA_CONFIRMAR)
@@ -171,13 +168,13 @@ int main(void)
 									estado_actual = GANASTE;
 									contador_ticks_estado = 0;
 								}
+								pos_password++;
+								LCDGotoXY(pos_password, 0);
+								LCDsendChar(caracter);				// Mostrar el caracter a ingresar
+								caracter = curr_word[pos_password]; // Obtener el caracter a ingresar
 							}
-							pos_password++;
 							numero_ingresado = 0; // Reiniciar el ingreso de caracteres
 							contador_ticks_estado = 0;
-							LCDGotoXY(pos_password + 1, 0);
-							LCDsendChar(caracter);				// Mostrar el caracter a ingresar
-							caracter = curr_word[pos_password]; // Obtener el caracter a ingresar
 						}
 						else
 						{
