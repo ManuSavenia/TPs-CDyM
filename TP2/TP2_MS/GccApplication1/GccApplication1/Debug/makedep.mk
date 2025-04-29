@@ -2,7 +2,11 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+KEYpad.c
+
 lcd.c
 
 main.c
+
+TIMER.c
 

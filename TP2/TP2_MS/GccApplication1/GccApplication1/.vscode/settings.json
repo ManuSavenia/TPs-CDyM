@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.s": "mips64",
+        "lcd.h": "c"
+    }
+}
