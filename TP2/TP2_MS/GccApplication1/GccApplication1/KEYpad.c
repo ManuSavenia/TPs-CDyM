@@ -2,10 +2,10 @@
 #include "keypad.h"
 
 const char KeyMap[16] = {
-	'1', '2', '3', 'A',
-	'4', '5', '6', 'B',
-	'7', '8', '9', 'C',
-	'*', '0', '#', 'D'};
+    '1', '2', '3', 'A',
+    '4', '5', '6', 'B',
+    '7', '8', '9', 'C',
+    '*', '0', '#', 'D'};
 
 uint8_t KeypadUpdate(void)
 {
@@ -15,7 +15,8 @@ uint8_t KeypadUpdate(void)
     PORTB |= (1 << PB0) | (1 << PB3) | (1 << PB4);
     PORTD |= (1 << PD7);
 
-    for (fila = 0; fila < 4; fila++){
+    for (fila = 0; fila < 4; fila++)
+    {
         // Apago la fila actual (salida '0')
         switch (fila)
         {
@@ -63,20 +64,24 @@ uint8_t KeypadUpdate(void)
     return 0xFF; // No se presiono tecla
 }
 
-uint8_t KEYPAD_Scan(uint8_t *pkey){
+uint8_t KEYPAD_Scan(uint8_t *pkey)
+{
     static uint8_t Old_key = 0xFF, Last_valid_key = 0xFF;
     uint8_t Key;
 
-    Key = KeypadUpdate(); // Esta funcion la tenos que implementar o conectar
+    Key = KeyMap[KeypadUpdate()]; // Esta funcion la tenos que implementar o conectar
 
-    if (Key == 0xFF){
+    if (Key == 0xFF)
+    {
         Old_key = 0xFF;
         Last_valid_key = 0xFF;
         return 0;
     }
 
-    if (Key == Old_key){
-        if (Key != Last_valid_key){
+    if (Key == Old_key)
+    {
+        if (Key != Last_valid_key)
+        {
             *pkey = Key;
             Last_valid_key = Key;
             return 1;
@@ -87,7 +92,8 @@ uint8_t KEYPAD_Scan(uint8_t *pkey){
     return 0;
 }
 
-void keypad_init(void){
+void keypad_init(void)
+{
     // Filas como salidas
     DDRB |= (1 << PB0) | (1 << PB3) | (1 << PB4);
     DDRD |= (1 << PD7);

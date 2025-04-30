@@ -9,7 +9,7 @@
 #include "keypad.h"
 #include "mef.h"
 
-volatile uint8_t tick = 0,seg = 0;
+volatile uint16_t tick = 0, seg = 0;
 
 int main(void)
 {
@@ -17,24 +17,27 @@ int main(void)
 	timer0_init();
 	LCD_Init();
 	keypad_init();
-	// srand(time(NULL));
 	_delay_ms(100);
 	uint8_t key;
 
-	while (1){
-		if (!KEYPAD_Scan(&key)){
+	while (1)
+	{
+		if (!KEYPAD_Scan(&key))
+		{
 			key = 0xFF;
 		}
-		update_mef(&seg, key); // Actualiza el estado de la MEF
 		_delay_ms(50);
+		update_mef(&seg, key);
 	}
+
 	return 0;
 }
 
 ISR(TIMER0_COMPA_vect)
 {
 	tick++;
-	if (tick == 100){
+	if (tick == 1000)
+	{
 		tick = 0;
 		seg++;
 	}
