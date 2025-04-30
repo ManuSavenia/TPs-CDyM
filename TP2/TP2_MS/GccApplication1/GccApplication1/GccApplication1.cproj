@@ -120,25 +120,31 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="KEYpad.c">
+    <Compile Include="timer.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="KEypad.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="lcd.c">
+    <Compile Include="timer.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="lcd.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="lcd.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="keypad.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="keypad.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mef.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mef.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="TIMER.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="TIMER.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

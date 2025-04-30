@@ -1,5 +1,11 @@
 #include <avr/io.h>
-#include "KEypad.h"
+#include "keypad.h"
+
+const char KeyMap[16] = {
+	'1', '2', '3', 'A',
+	'4', '5', '6', 'B',
+	'7', '8', '9', 'C',
+	'*', '0', '#', 'D'};
 
 uint8_t KeypadUpdate(void)
 {
