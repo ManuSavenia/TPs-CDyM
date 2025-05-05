@@ -44,7 +44,7 @@ void init_mef()
     curr_state = INICIO;
 }
 
-void update_mef(volatile uint8_t *seg, uint8_t key)
+void update_mef(volatile uint16_t *seg, uint8_t key)
 {
     switch (curr_state)
     {
@@ -52,7 +52,7 @@ void update_mef(volatile uint8_t *seg, uint8_t key)
         if (Ftime)
         {
             LCDclr();
-            _delay_ms(160);
+            _delay_ms(10);
             LCDstring("Bienvenido!!", 12);
             LCDGotoXY(0, 1);
             LCDstring("Presione *", 10);
@@ -60,7 +60,7 @@ void update_mef(volatile uint8_t *seg, uint8_t key)
         }
         else
         {
-            if (key == CHAR_INICIO)
+            if (key == '*')
             {
                 strcpy(guess, "*****");
                 first = 1;

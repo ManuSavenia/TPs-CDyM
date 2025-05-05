@@ -1,4 +1,7 @@
 #include <avr/io.h>
+#include <avr/io.h>
+#define F_CPU 16000000UL
+#include <util/delay.h>
 #include "keypad.h"
 
 const char KeyMap[16] = {
@@ -33,7 +36,7 @@ uint8_t KeypadUpdate(void)
             PORTD &= ~(1 << PD7);
             break;
         }
-
+		_delay_us(5);
         // Escaneo las columnas
         if (!(PIND & (1 << PD3)))
             return (fila * 4 + 0); // Columna 0
@@ -100,5 +103,6 @@ void keypad_init(void)
 
     // Columnas como entradas con pull-up
     DDRD &= ~((1 << PD2) | (1 << PD3) | (1 << PD4) | (1 << PD5));
+    PORTB |= (1 << PB0) | (1 << PB3) | (1 << PB4);
     PORTD |= (1 << PD2) | (1 << PD3) | (1 << PD4) | (1 << PD5);
 }

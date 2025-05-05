@@ -26,7 +26,7 @@ int main(void)
 		{
 			key = 0xFF;
 		}
-		_delay_ms(50);
+		_delay_ms(10);
 		update_mef(&seg, key);
 	}
 
