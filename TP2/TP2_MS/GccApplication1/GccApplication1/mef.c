@@ -25,8 +25,8 @@ typedef enum
     INICIO,
     INICIO_JUEGO,
     JUEGO,
-    PERDISTE,
-    GANASTE
+    DERROTA,
+    VICTORIA
 } estado_t;
 
 const char *dict[] = {
@@ -48,6 +48,7 @@ void init_mef()
 
 void update_mef(uint8_t key)
 {
+    flag = 0;
     switch (curr_state)
     {
     case INICIO:
@@ -129,7 +130,7 @@ void update_mef(uint8_t key)
                 hp--;
                 if (hp == 0)
                 {
-                    curr_state = PERDISTE;
+                    curr_state = DERROTA;
                     seg = 0;
                 }
 
@@ -152,7 +153,7 @@ void update_mef(uint8_t key)
             }
             if (pass_index == 5)
             {
-                curr_state = GANASTE;
+                curr_state = VICTORIA;
                 sec_to_win = seg;
                 seg = 0;
             }
@@ -161,7 +162,7 @@ void update_mef(uint8_t key)
         LCDstring(life, 6); // Mostrar vidas restantes
         break;
 
-    case PERDISTE:
+    case DERROTA:
         if (first)
         {
             LCDclr();
@@ -182,7 +183,7 @@ void update_mef(uint8_t key)
         }
         break;
 
-    case GANASTE:
+    case VICTORIA:
         if (first)
         {
             LCDclr();

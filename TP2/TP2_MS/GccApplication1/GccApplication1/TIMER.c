@@ -16,7 +16,7 @@ void timer0_init()
 ISR(TIMER0_COMPA_vect)
 {
 	tick++;
-	flag ^= 1;
+	flag = 1;
 	if (tick == 100)
 	{
 		tick = 0;
