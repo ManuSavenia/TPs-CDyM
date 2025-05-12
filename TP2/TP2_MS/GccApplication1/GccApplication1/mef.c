@@ -35,7 +35,9 @@ const char *dict[] = {
     "Valor", "Verde", "YnHRz", "hARdD", "silla"};
 
 estado_t curr_state;
-uint8_t input_char, hp, pass_index = 0, first, sec_to_win, Ftime = 1;
+uint8_t input_char, hp, pass_index = 0, first, sec_to_win, firstExec = 1;
+uint8_t firstRun = 1;
+volatile uint8_t seg = 0, flag = 0, tick = 0;
 char *password, guess[6];
 char life[7];
 
@@ -44,31 +46,36 @@ void init_mef()
     curr_state = INICIO;
 }
 
-void update_mef(volatile uint16_t *seg, uint8_t key)
+void update_mef(uint8_t key)
 {
     switch (curr_state)
     {
     case INICIO:
-        if (Ftime)
+        if (firstExec)
         {
             LCDclr();
             _delay_ms(10);
             LCDstring("Bienvenido!!", 12);
             LCDGotoXY(0, 1);
             LCDstring("Presione *", 10);
-            Ftime = 0;
+            firstExec = 0;
         }
         else
         {
-            if (key == '*')
+            if (key == CHAR_INICIO)
             {
+                // obtener semilla random, solo la primera ejecucion
+                if (firstRun){
+                    srand(seg * 100 + tick);
+                    firstRun = 0;
+                }
                 strcpy(guess, "*****");
                 first = 1;
                 hp = 3;
                 pass_index = 0;
-                password = get_random_word(dict, NUM_WORDS);
                 curr_state = INICIO_JUEGO;
-                Ftime = 1;
+                firstExec = 1;
+                password = get_random_word(dict, NUM_WORDS);
             }
         }
         break;
@@ -82,10 +89,10 @@ void update_mef(volatile uint16_t *seg, uint8_t key)
             LCDGotoXY(0, 0);
             LCDstring(password, 5);
             first = 0;
-            *seg = 0;
+            seg = 0;
         }
         // comenzar juego
-        if (*seg == 2)
+        if (seg == 2)
         {
             curr_state = JUEGO;
             LCDclr();
@@ -123,7 +130,7 @@ void update_mef(volatile uint16_t *seg, uint8_t key)
                 if (hp == 0)
                 {
                     curr_state = PERDISTE;
-                    *seg = 0;
+                    seg = 0;
                 }
 
                 if (hp == 2)
@@ -146,8 +153,8 @@ void update_mef(volatile uint16_t *seg, uint8_t key)
             if (pass_index == 5)
             {
                 curr_state = GANASTE;
-                sec_to_win = *seg;
-                *seg = 0;
+                sec_to_win = seg;
+                seg = 0;
             }
         }
         LCDGotoXY(9, 1);
@@ -163,14 +170,14 @@ void update_mef(volatile uint16_t *seg, uint8_t key)
             LCDGotoXY(0, 1);
             LCDstring(password, 5);
             first = 0;
-            *seg = 0;
+            seg = 0;
         }
         else
         {
-            if (*seg == 5)
+            if (seg == 5)
             {
                 curr_state = INICIO;
-                *seg = 0;
+                seg = 0;
             }
         }
         break;
@@ -186,14 +193,14 @@ void update_mef(volatile uint16_t *seg, uint8_t key)
             sprintf(message, "Tiempo: %ds", sec_to_win);
             LCDstring(message, 11);
             first = 0;
-            *seg = 0;
+            seg = 0;
         }
         else
         {
-            if (*seg == 5)
+            if (seg == 5)
             {
                 curr_state = INICIO;
-                *seg = 0;
+                seg = 0;
             }
         }
         break;

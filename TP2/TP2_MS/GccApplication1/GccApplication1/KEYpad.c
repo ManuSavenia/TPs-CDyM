@@ -36,7 +36,7 @@ uint8_t KeypadUpdate(void)
             PORTD &= ~(1 << PD7);
             break;
         }
-		_delay_us(5);
+		_delay_us(10); // Espera un poco para estabilizar la señal
         // Escaneo las columnas
         if (!(PIND & (1 << PD3)))
             return (fila * 4 + 0); // Columna 0

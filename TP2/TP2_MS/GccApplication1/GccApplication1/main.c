@@ -9,36 +9,25 @@
 #include "keypad.h"
 #include "mef.h"
 
-volatile uint16_t tick = 0, seg = 0;
 
 int main(void)
 {
-	init_mef();
+	uint8_t key;
 	timer0_init();
 	LCD_Init();
 	keypad_init();
-	_delay_ms(100);
-	uint8_t key;
+	init_mef();
+	_delay_ms(100); // pequeño delay para que todo se inicialice correctamente
 
 	while (1)
 	{
-		if (!KEYPAD_Scan(&key))
-		{
-			key = 0xFF;
+		if (flag){
+			if (!KEYPAD_Scan(&key)){
+				key = 0xFF;
+			}
+			update_mef(key);
 		}
-		_delay_ms(10);
-		update_mef(&seg, key);
 	}
 
 	return 0;
-}
-
-ISR(TIMER0_COMPA_vect)
-{
-	tick++;
-	if (tick == 1000)
-	{
-		tick = 0;
-		seg++;
-	}
 }
