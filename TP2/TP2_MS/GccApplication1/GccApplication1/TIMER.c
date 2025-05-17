@@ -10,9 +10,10 @@ void timer0_init()
     TCCR0B = (1 << CS02) | (1 << CS00); // Prescaler 1024
     OCR0A = 155;                        // Para 10 ms con 16MHz y prescaler 1024
     TIMSK0 |= (1 << OCIE0A);            // Habilitar interrupcion de comparacion
-    sei();
+    sei();								// Habilitar interrupciones globales
 }
 
+// interrupcion de Timer0, se ejecuta cada 10 ms
 ISR(TIMER0_COMPA_vect)
 {
 	tick++;

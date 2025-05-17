@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c00000002000000030000000083ffff0083ffffffffffffffffffffb00000000c000000d0060000fc030000</PLACEMENT>
+  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffffb00000000c000000d0060000fc030000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
@@ -92,6 +92,50 @@
      <ITEM name="ShowChanges">Yes</ITEM>
      <ITEM name="ShowToolTips">Yes</ITEM>
      <ITEM name="TopLineAddress">00000020</ITEM>
+    </PROPERTIES>
+   </POPUP>
+   <POPUP w="831" x="304" flags="0000002a" y="167" h="575" pid="1" iid="1">
+    <PROPERTIES>
+     <ITEM name="Breakpoint 0">"__vector_14",010C,000C,0053,7F72,-1
+</ITEM>
+     <ITEM name="Breakpoint 1">"update_mef",07EC,011C,E8FA,E4F1,-1
+</ITEM>
+     <ITEM name="Breakpoint 2">"update_mef",07EC,011C,3C4B,E4F1,1
+</ITEM>
+     <ITEM name="Breakpoint 3">"update_mef",07FA,012A,9219,E4F1,-1
+</ITEM>
+     <ITEM name="Breakpoint 4">"update_mef",0940,0270,E8FA,E4F1,-1
+</ITEM>
+     <ITEM name="Breakpoint 5">"update_mef",0950,0280,098D,E4F1,-1
+</ITEM>
+     <ITEM name="Breakpoint 6">"update_mef",09B4,02E4,E8FA,E4F1,1
+</ITEM>
+     <ITEM name="Breakpoint 7">"update_mef",09CE,02FE,098D,E4F1,1
+</ITEM>
+     <ITEM name="CaseSensitive">No</ITEM>
+     <ITEM name="DISPADDRS">Yes</ITEM>
+     <ITEM name="DISPLNUMS">No</ITEM>
+     <ITEM name="DISPOPCODES">No</ITEM>
+     <ITEM name="FIXUPBPTS">Yes</ITEM>
+     <ITEM name="WordsOnly">No</ITEM>
+     <ITEM name="nBreakpoints">8</ITEM>
+    </PROPERTIES>
+   </POPUP>
+   <POPUP w="371" x="130" flags="0000000a" y="224" h="436" pid="2" iid="1">
+    <PROPERTIES>
+     <ITEM name="Address Column Width">94</ITEM>
+     <ITEM name="AutoResize">No</ITEM>
+     <ITEM name="Gridlines">Yes</ITEM>
+     <ITEM name="Name Column Width">94</ITEM>
+     <ITEM name="ShowAddresses">Yes</ITEM>
+     <ITEM name="ShowGlobals">Yes</ITEM>
+     <ITEM name="ShowPreviousValues">No</ITEM>
+     <ITEM name="ShowTypes">No</ITEM>
+     <ITEM name="ShowWatchPoint">No</ITEM>
+     <ITEM name="TriggerMode">0</ITEM>
+     <ITEM name="Value Column Width">94</ITEM>
+     <ITEM name="Version">100</ITEM>
+     <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
   </PWI>

@@ -12,7 +12,7 @@ const char KeyMap[16] = {
 
 uint8_t KeypadUpdate(void)
 {
-    uint8_t fila, col;
+    uint8_t fila;
 
     // Primero, ponemos todas las filas en alto (salida '1')
     PORTB |= (1 << PB0) | (1 << PB3) | (1 << PB4);
