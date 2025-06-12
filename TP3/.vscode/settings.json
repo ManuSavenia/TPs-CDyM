@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.s": "mips64",
+        "rtc.H": "cpp"
+    }
+}
