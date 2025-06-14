@@ -20,7 +20,7 @@ main.d main.o: .././main.c \
  c:\program\ files\microchip\xc8\v2.36\avr\avr\include\stdlib.h \
  c:\program\ files\microchip\xc8\v2.36\avr\avr\include\string.h \
  c:\program\ files\microchip\xc8\v2.36\avr\avr\include\ctype.h .././i2c.h \
- .././uart.h .././rtc.h .././timer.h
+ .././uart.h .././utils.h .././timer.h .././rtc.h
 
 c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\io.h:
 
@@ -68,6 +68,8 @@ c:\program\ files\microchip\xc8\v2.36\avr\avr\include\ctype.h:
 
 .././uart.h:
 
-.././rtc.h:
+.././utils.h:
 
 .././timer.h:
+
+.././rtc.h:

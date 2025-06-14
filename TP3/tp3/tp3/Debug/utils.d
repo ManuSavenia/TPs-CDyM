@@ -12,7 +12,11 @@ utils.d utils.o: .././utils.c .././utils.h .././timer.h \
  c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\common.h \
  c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\fuse.h \
  c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\lock.h \
- .././rtc.h .././i2c.h
+ c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\interrupt.h \
+ c:\program\ files\microchip\xc8\v2.36\avr\avr\include\stdio.h \
+ c:\program\ files\microchip\xc8\v2.36\avr\avr\include\string.h \
+ c:\program\ files\microchip\xc8\v2.36\avr\avr\include\ctype.h .././rtc.h \
+ .././i2c.h
 
 .././utils.h:
 
@@ -43,6 +47,14 @@ c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\common.h:
 c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\fuse.h:
 
 c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\lock.h:
+
+c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\interrupt.h:
+
+c:\program\ files\microchip\xc8\v2.36\avr\avr\include\stdio.h:
+
+c:\program\ files\microchip\xc8\v2.36\avr\avr\include\string.h:
+
+c:\program\ files\microchip\xc8\v2.36\avr\avr\include\ctype.h:
 
 .././rtc.h:
 

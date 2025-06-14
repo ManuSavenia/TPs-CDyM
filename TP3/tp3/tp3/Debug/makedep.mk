@@ -8,8 +8,6 @@ main.c
 
 rtc.c
 
-serialport.c
-
 timer.c
 
 uart.c

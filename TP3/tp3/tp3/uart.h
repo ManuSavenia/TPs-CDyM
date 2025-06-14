@@ -3,17 +3,12 @@
 
 #include <stdint.h>
 
-#define CMD_BUFFER_SIZE 128 
-extern volatile uint8_t command_buffer[CMD_BUFFER_SIZE];
+#define BUFFER_SIZE 128 
+extern volatile uint8_t rx_buffer[BUFFER_SIZE];
 extern volatile uint8_t cmd_index;
-extern volatile uint8_t command_ready;
+extern volatile uint8_t rx_flag;
 
-/**
- * @brief Inicializa el módulo UART para la comunicación serie.
- *
- * Configura los parámetros necesarios para habilitar la transmisión y recepción
- * de datos a través de la interfaz UART.
- */
-void UART_init();
+void UART_init(uint8_t baud_rate);
+void uart_send_string(const char *str);
 
 #endif

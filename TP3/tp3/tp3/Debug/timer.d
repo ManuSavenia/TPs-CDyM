@@ -11,7 +11,8 @@ timer.d timer.o: .././timer.c .././timer.h \
  c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\portpins.h \
  c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\common.h \
  c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\fuse.h \
- c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\lock.h
+ c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\lock.h \
+ c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\interrupt.h
 
 .././timer.h:
 
@@ -40,3 +41,5 @@ c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\common.h:
 c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\fuse.h:
 
 c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\lock.h:
+
+c:\program\ files\microchip\xc8\v2.36\avr\avr\include\avr\interrupt.h:

@@ -109,12 +109,6 @@
     <Compile Include="rtc.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="serialport.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="serialport.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="timer.c">
       <SubType>compile</SubType>
     </Compile>
