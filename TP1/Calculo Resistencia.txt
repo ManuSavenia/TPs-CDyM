@@ -1,7 +1,2 @@
-Datos:
-	Vcc= 4.8v, I= 10mA, Vled(Amarillo)= 2v
-
-Calculo:
-	Planteamos ley de Kirchoff y obtenemos:
-	4.8v = 2v + 10mA * R
-	[R = (4.8v - 2v)/10mA = 280 Ohms]
+Hola Sergio, nos olvidamos de aclarar que cuando se esperan los 3 segundos y pasa un auto, se comienza a contar 3 segundos devuelta, pero esto puede ocurrir hasta un maximo de 5 veces. Luego de cumplidos estos 5 ciclos, se pone en rojo el semaforo y se le da paso al peaton.
+En la otra calle, cuando el semaforo esta en rojo, al pasar un auto se cuentan tambien 3 segundos por si pasa un peaton. En caso de que esto suceda, se le da paso durante 15 segundos y luego se pone en verde en semaforo. En caso de que no circule ningun peaton durante los 3 segundos de espera, el semaforo se pone en verde. 	
