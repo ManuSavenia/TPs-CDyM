@@ -22,15 +22,13 @@ ISR(USART_RX_vect){
     if ((received_byte == '\b' || received_byte == 0x7F) && cmd_index > 0){ // Manejo de retroceso
         cmd_index--;
     }
-    if (received_byte == '\r' || received_byte == '\n'){
+    else if (received_byte == '\r' || received_byte == '\n'){
         rx_buffer[cmd_index] = '\0';
         cmd_index = 0;
         rx_flag = 1;                  //flag de comando listo para el main loop
-        uart_send_string("\r\n");
     }
     else if (cmd_index < BUFFER_SIZE - 1){
         rx_buffer[cmd_index++] = received_byte;
-        uart_send_char(received_byte);
     }
 }
 

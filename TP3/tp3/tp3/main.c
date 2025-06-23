@@ -51,7 +51,7 @@ typedef enum {
 
 command_t command_type;
 
-void parse_command(const char *cmd){
+void parse_command(char *cmd){
     if (strcmp(cmd, "ON") == 0)
         command_type = COMMAND_ON;
     else if (strcmp(cmd, "OFF") == 0)
